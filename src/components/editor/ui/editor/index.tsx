@@ -12,6 +12,7 @@ import { EditorBubbleMenu } from "./bubble-menu";
 import { Context } from "./provider";
 import { default as TopMenu } from "./top-menu-bar";
 import CharacterCount from "@tiptap/extension-character-count";
+import { getPrevText } from "../../lib/editor";
 
 export default function Editor({}) {
   const [content, setContent] = useLocalStorage(
@@ -27,7 +28,7 @@ export default function Editor({}) {
     const json = editor.getJSON();
     setSaveStatus("Saving...");
     setContent(json);
-    
+
     setTimeout(() => {
       setSaveStatus("Saved");
     }, 500);
@@ -44,19 +45,19 @@ export default function Editor({}) {
     onUpdate: (e) => {
       setSaveStatus("Unsaved");
       debouncedUpdates(e);
-    //   const selection = e.editor.state.selection;
-    //   const lastTwo = getPrevText(e.editor, {
-    //     chars: 2,
-    //   });
-    //   if (lastTwo === "++" && !isLoading) {
-    //     e.editor.commands.deleteRange({
-    //       from: selection.from - 2,
-    //       to: selection.from,
-    //     });
-    //     complete(getPrevText(e.editor, { chars: 5000 }));
-    //   } else {
-    //     debouncedUpdates(e);
-    //   }
+        const selection = e.editor.state.selection;
+        const lastTwo = getPrevText(e.editor, {
+          chars: 2,
+        });
+        if (lastTwo === "++" && !isLoading) {
+          e.editor.commands.deleteRange({
+            from: selection.from - 2,
+            to: selection.from,
+          });
+          complete(getPrevText(e.editor, { chars: 5000 }));
+        } else {
+          debouncedUpdates(e);
+        }
     },
     autofocus: "end",
   });
@@ -137,7 +138,6 @@ export default function Editor({}) {
         }}
         className="relative min-h-[900px] w-full max-w-screen-lg border-stone-200 bg-white sm:mb-[calc(5vh)] sm:rounded-2xl sm:border sm:shadow-2xl"
       >
-
         <div className="w-full bg-indigo-800 bg-opacity-60 px-12 sm:rounded-t-2xl">
           <div className="flex h-20 justify-between items-center">
             {editor && <TopMenu editor={editor} />}
@@ -149,18 +149,17 @@ export default function Editor({}) {
         </div>
 
         {editor && <EditorBubbleMenu editor={editor} />}
-        <EditorContent editor={editor} spellCheck="false"/>
+        <EditorContent editor={editor} spellCheck="false" />
 
         <div className="w-full px-12 sm:rounded-b-2xl">
           <div className="flex h-12 justify-end items-center">
             <div className="absolute bottom-3 right-10">
               <div className="character-count opacity-30 text-sm select-none flex justify-start">
-                {editor && editor.storage.characterCount.characters()}/{wordLimit}{" "}
-                characters
+                {editor && editor.storage.characterCount.characters()}/
+                {wordLimit} characters
                 {/* {editor && editor.storage.characterCount.words()} words */}
               </div>
             </div>
-
           </div>
         </div>
       </div>

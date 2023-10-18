@@ -11,6 +11,44 @@ import TaskList from "@tiptap/extension-task-list";
 import Highlight from "@tiptap/extension-highlight";
 import SlashCommand from "./slash-command";
 
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import Document from '@tiptap/extension-document'
+import Paragraph from '@tiptap/extension-paragraph'
+import Text from '@tiptap/extension-text'
+
+import {createLowlight} from 'lowlight'
+const lowlight = createLowlight()
+
+import css from 'highlight.js/lib/languages/css'
+import js from 'highlight.js/lib/languages/javascript'
+import ts from 'highlight.js/lib/languages/typescript'
+import html from 'highlight.js/lib/languages/xml'
+import scss from "highlight.js/lib/languages/scss.js";
+import stylus from "highlight.js/lib/languages/stylus.js";
+import json from "highlight.js/lib/languages/json.js";
+import xml from "highlight.js/lib/languages/xml.js";
+import md from "highlight.js/lib/languages/markdown.js";
+
+// CSS
+lowlight.register("css", css);
+lowlight.register("scss", scss);
+lowlight.register("stylus", stylus);
+
+// JS
+lowlight.register("js", js);
+lowlight.register("javascript", js);
+lowlight.register("jsx", js);
+lowlight.register("ts", ts);
+lowlight.register("tsx", ts);
+lowlight.register("typescript", ts);
+lowlight.register("json", json);
+
+// HTML
+lowlight.register("html", html);
+lowlight.register("xml", xml);
+lowlight.register("md", md);
+lowlight.register("markdown", md);
+
 export const defaultExtensions = [
   StarterKit.configure({
     bulletList: {
@@ -34,12 +72,12 @@ export const defaultExtensions = [
         class: "border-l-4 border-stone-700",
       },
     },
-    codeBlock: {
-      HTMLAttributes: {
-        class:
-          "rounded-xl bg-gray-700 p-5 font-sans font-medium text-indigo-200 text-xl",
-      },
-    },
+    // codeBlock: {
+    //   HTMLAttributes: {
+    //     class:
+    //       "rounded-xl bg-gray-700 p-5 font-sans font-medium text-indigo-200 text-xl",
+    //   },
+    // },
     code: {
       HTMLAttributes: {
         class:
@@ -71,13 +109,25 @@ export const defaultExtensions = [
     },
     includeChildren: true,
   }),
+  //Chage № 1: Adding lowlight for Virtual syntax highlighting
+  Document,
+  Paragraph,
+  Text,
+  CodeBlockLowlight.configure({
+    lowlight,
+    languageClassPrefix: 'language-js',
+    HTMLAttributes: {
+      class: 'rounded-xl font-medium text-xl',
+    },
+  }),
+  //-----------------------------------------------------------
   SlashCommand,
   TiptapUnderline,
   TextStyle,
   TextAlign.configure({
     types: ['heading', 'paragraph'],
     alignments: ['left', 'center', 'right', 'justify'],
-    defaultAlignment: 'left',
+    defaultAlignment: 'left', 
   }),
   Color,
   Highlight.configure({

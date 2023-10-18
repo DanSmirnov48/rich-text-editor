@@ -5,14 +5,14 @@
 .ProseMirror .is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
-  color: var(--novel-stone-400);
+  color: var(--stone-400);
   pointer-events: none;
   height: 0;
 }
 .ProseMirror .is-empty::before {
   content: attr(data-placeholder);
   float: left;
-  color: var(--novel-stone-400);
+  color: var(--stone-400);
   pointer-events: none;
   height: 0;
 }
@@ -37,24 +37,24 @@ ul[data-type="taskList"] li > label {
 ul[data-type="taskList"] li > label input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
-  background-color: var(--novel-white);
+  background-color: var(--white);
   margin: 0;
   cursor: pointer;
   width: 1.2em;
   height: 1.2em;
   position: relative;
   top: 5px;
-  border: 2px solid var(--novel-stone-900);
+  border: 2px solid var(--stone-900);
   margin-right: 0.3rem;
   display: grid;
   place-content: center;
 
   &:hover {
-    background-color: var(--novel-stone-50);
+    background-color: var(--stone-50);
   }
 
   &:active {
-    background-color: var(--novel-stone-200);
+    background-color: var(--stone-200);
   }
 
   &::before {
@@ -74,7 +74,7 @@ ul[data-type="taskList"] li > label input[type="checkbox"] {
 }
 
 ul[data-type="taskList"] li[data-checked="true"] > div > p {
-  color: var(--novel-stone-400);
+  color: var(--stone-400);
   text-decoration: line-through;
   text-decoration-thickness: 2px;
 }
@@ -88,7 +88,7 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
 .ProseMirror:not(.dragging) .ProseMirror-selectednode {
   outline: none !important;
   border-radius: 0.2rem;
-  background-color: var(--novel-highlight-blue);
+  background-color: var(--highlight-blue);
   transition: background-color 0.2s;
   box-shadow: none;
 }
@@ -109,12 +109,12 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
   cursor: grab;
 
   &:hover {
-    background-color: var(--novel-stone-100);
+    background-color: var(--stone-100);
     transition: background-color 0.2s;
   }
 
   &:active {
-    background-color: var(--novel-stone-200);
+    background-color: var(--stone-200);
     transition: background-color 0.2s;
   }
 
