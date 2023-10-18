@@ -1,0 +1,8 @@
+:root {
+  --font-title: "Cal Sans", sans-serif;
+}
+
+@font-face {
+  font-family: "Cal Sans";
+  src: local("Cal Sans"), url(CalSans-SemiBold.otf) format("otf");
+}
