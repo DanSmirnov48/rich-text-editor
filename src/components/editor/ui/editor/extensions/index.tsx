@@ -23,11 +23,11 @@ import css from 'highlight.js/lib/languages/css'
 import js from 'highlight.js/lib/languages/javascript'
 import ts from 'highlight.js/lib/languages/typescript'
 import html from 'highlight.js/lib/languages/xml'
-import scss from "highlight.js/lib/languages/scss.js";
-import stylus from "highlight.js/lib/languages/stylus.js";
-import json from "highlight.js/lib/languages/json.js";
-import xml from "highlight.js/lib/languages/xml.js";
-import md from "highlight.js/lib/languages/markdown.js";
+import scss from "highlight.js/lib/languages/scss";
+import stylus from "highlight.js/lib/languages/stylus";
+import json from "highlight.js/lib/languages/json";
+import xml from "highlight.js/lib/languages/xml";
+import md from "highlight.js/lib/languages/markdown";
 
 // CSS
 lowlight.register("css", css);

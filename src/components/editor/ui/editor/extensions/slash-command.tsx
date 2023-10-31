@@ -247,7 +247,7 @@ const CommandList = ({
     (index: number) => {
       const item = items[index];
       if (item) {
-        if (item.title === "Continue writing") {
+        if (item.title === "Write Magic") {
           if (isLoading) return;
           complete(
             getPrevText(editor, {
@@ -313,15 +313,13 @@ const CommandList = ({
         return (
           <button
             className={`flex w-full items-center space-x-2 rounded-md px-2 py-1 text-left text-sm text-stone-900 hover:bg-stone-100 ${
-              index === selectedIndex
-                ? "bg-stone-100 text-stone-900"
-                : ""
+              index === selectedIndex ? "bg-stone-100 text-stone-900" : ""
             }`}
             key={index}
             onClick={() => selectItem(index)}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-md border border-stone-200 bg-white">
-              {item.title === "Continue writing" && isLoading ? (
+              {item.title === "Write Magic" && isLoading ? (
                 <LoadingCircle />
               ) : (
                 item.icon
@@ -329,9 +327,7 @@ const CommandList = ({
             </div>
             <div>
               <p className="font-medium">{item.title}</p>
-              <p className="text-xs text-stone-500">
-                {item.description}
-              </p>
+              <p className="text-xs text-stone-500">{item.description}</p>
             </div>
           </button>
         );

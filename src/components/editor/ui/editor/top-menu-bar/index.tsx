@@ -4,12 +4,6 @@ import {
   Bold,
   Code,
   CodepenIcon,
-  Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-  Heading5,
-  Heading6,
   Italic,
   List,
   ListOrdered,
@@ -21,9 +15,21 @@ import {
   AlignJustify,
   AlignCenter,
   AlignRight,
+  BoldIcon,
 } from "lucide-react";
+import { NodeSelector } from "./node-selector";
+import { useState } from "react";
 
+export interface TopMenuItem {
+  name: string;
+  isActive: () => boolean;
+  command: () => void;
+  icon: typeof BoldIcon;
+}
 export default function TipTapMenuBar({ editor }: { editor: Editor }) {
+
+  const [isNodeSelectorOpen, setIsNodeSelectorOpen] = useState(false);
+
   return (
     <div className="flex flex-wrap gap-2">
       {/* First part of tools */}
@@ -65,43 +71,15 @@ export default function TipTapMenuBar({ editor }: { editor: Editor }) {
       </div>
 
       {/* Second part of tools */}
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={editor.isActive("heading", { level: 1 }) ? "is-active" : ""}
-      >
-        <Heading1 className="w-6 h-6" />
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive("heading", { level: 2 }) ? "is-active" : ""}
-      >
-        <Heading2 className="w-6 h-6" />
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        className={editor.isActive("heading", { level: 3 }) ? "is-active" : ""}
-      >
-        <Heading3 className="w-6 h-6" />
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-        className={editor.isActive("heading", { level: 4 }) ? "is-active" : ""}
-      >
-        <Heading4 className="w-6 h-6" />
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-        className={editor.isActive("heading", { level: 5 }) ? "is-active" : ""}
-      >
-        <Heading5 className="w-6 h-6" />
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-        className={editor.isActive("heading", { level: 6 }) ? "is-active" : ""}
-      >
-        <Heading6 className="w-6 h-6" />
-      </button>
 
+      <NodeSelector
+        editor={editor}
+        isOpen={isNodeSelectorOpen}
+        setIsOpen={() => {
+          setIsNodeSelectorOpen(!isNodeSelectorOpen);
+        }}
+      />
+      
       <div className="h-15">
         <Separator.Root
           className="bg-black data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px mx-[5px]"
