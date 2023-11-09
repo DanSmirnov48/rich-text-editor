@@ -69,9 +69,9 @@ export const NodeSelector: FC<NodeSelectorProps> = ({
 
   return (
     <Popover.Root open={isOpen}>
-      <div className="relative h-full -mx-2">
+      <div className="relative h-full">
         <Popover.Trigger
-          className="flex h-full items-center gap-1 whitespace-nowrap p-2 text-sm font-medium text-blac"
+          className="flex h-full items-center gap-1 whitespace-nowrap p-2.5 text-base text-black bg-[#f1f5f9] active:bg-stone-200 rounded-md font-semibold"
           onClick={() => setIsOpen(!isOpen)}
         >
           {/* <span>{activeItem?.name}</span> */}
@@ -98,7 +98,7 @@ export const NodeSelector: FC<NodeSelectorProps> = ({
               type="button"
             >
               <div className="flex items-center space-x-2">
-                <item.icon className="h-6 w-6" />
+                {item.icon && <item.icon className="h-6 w-6" />}
               </div>
             </button>
           ))}

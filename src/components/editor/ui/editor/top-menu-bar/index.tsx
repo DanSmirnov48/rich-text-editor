@@ -16,23 +16,44 @@ import {
   AlignCenter,
   AlignRight,
   BoldIcon,
+  UnderlineIcon,
 } from "lucide-react";
 import { NodeSelector } from "./node-selector";
 import { useState } from "react";
+import { FontSelector } from "./font-select";
 
 export interface TopMenuItem {
   name: string;
+  font?: string | null;
   isActive: () => boolean;
   command: () => void;
-  icon: typeof BoldIcon;
+  icon?: typeof BoldIcon;
 }
 export default function TipTapMenuBar({ editor }: { editor: Editor }) {
-
   const [isNodeSelectorOpen, setIsNodeSelectorOpen] = useState(false);
+  const [isFontSelectorOpen, setIsFontSelectorOpen] = useState(false);
 
   return (
     <div className="flex flex-wrap gap-2">
       {/* First part of tools */}
+      <FontSelector
+        editor={editor}
+        isOpen={isFontSelectorOpen}
+        setIsOpen={() => {
+          setIsFontSelectorOpen(!isFontSelectorOpen);
+          setIsNodeSelectorOpen(false);
+        }}
+      />
+
+      <NodeSelector
+        editor={editor}
+        isOpen={isNodeSelectorOpen}
+        setIsOpen={() => {
+          setIsNodeSelectorOpen(!isNodeSelectorOpen);
+          setIsFontSelectorOpen(false);
+        }}
+      />
+
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -46,6 +67,12 @@ export default function TipTapMenuBar({ editor }: { editor: Editor }) {
         className={editor.isActive("italic") ? "is-active" : ""}
       >
         <Italic className="w-6 h-6" />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
+        className={editor.isActive('underline') ? 'is-active' : ''}
+      >
+        <UnderlineIcon className="w-6 h-6" />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
@@ -62,24 +89,6 @@ export default function TipTapMenuBar({ editor }: { editor: Editor }) {
         <Code className="w-6 h-6" />
       </button>
 
-      <div className="h-15">
-        <Separator.Root
-          className="bg-black data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px mx-[5px]"
-          decorative
-          orientation="vertical"
-        />
-      </div>
-
-      {/* Second part of tools */}
-
-      <NodeSelector
-        editor={editor}
-        isOpen={isNodeSelectorOpen}
-        setIsOpen={() => {
-          setIsNodeSelectorOpen(!isNodeSelectorOpen);
-        }}
-      />
-      
       <div className="h-15">
         <Separator.Root
           className="bg-black data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px mx-[5px]"
