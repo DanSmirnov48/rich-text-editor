@@ -12,6 +12,7 @@ import {
 import * as Popover from "@radix-ui/react-popover";
 import { Dispatch, FC, SetStateAction } from "react";
 import { TopMenuItem } from ".";
+import DynamicHeadingIcon from "../DynamicHeadingIcon";
 
 interface NodeSelectorProps {
   editor: Editor;
@@ -74,9 +75,8 @@ export const NodeSelector: FC<NodeSelectorProps> = ({
           className="flex h-full items-center gap-1 whitespace-nowrap p-2.5 text-base text-black bg-[#f1f5f9] active:bg-stone-200 rounded-md font-semibold"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {/* <span>{activeItem?.name}</span> */}
-          <span>
-            <Heading />
+          <span className="-m-0.5">
+            <DynamicHeadingIcon name={activeItem.name} />
           </span>
           <ChevronDown className="h-4 w-4" />
         </Popover.Trigger>
