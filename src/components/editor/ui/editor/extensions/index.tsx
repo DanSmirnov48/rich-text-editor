@@ -1,5 +1,6 @@
 import StarterKit from "@tiptap/starter-kit";
 import TiptapLink from "@tiptap/extension-link";
+import TiptapImage from "@tiptap/extension-image";
 import FontFamily from '@tiptap/extension-font-family';
 import TextAlign from '@tiptap/extension-text-align';
 import Placeholder from "@tiptap/extension-placeholder";
@@ -10,6 +11,7 @@ import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
 import Highlight from "@tiptap/extension-highlight";
 import SlashCommand from "./slash-command";
+import UploadImagesPlugin from "../plugins/upload-image";
 
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import Document from '@tiptap/extension-document'
@@ -72,12 +74,6 @@ export const defaultExtensions = [
         class: "border-l-4 border-stone-700",
       },
     },
-    // codeBlock: {
-    //   HTMLAttributes: {
-    //     class:
-    //       "rounded-xl bg-gray-700 p-5 font-sans font-medium text-indigo-200 text-xl",
-    //   },
-    // },
     code: {
       HTMLAttributes: {
         class:
@@ -95,6 +91,16 @@ export const defaultExtensions = [
     HTMLAttributes: {
       class:
         "text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer",
+    },
+  }),
+  TiptapImage.extend({
+    addProseMirrorPlugins() {
+      return [UploadImagesPlugin()];
+    },
+  }).configure({
+    allowBase64: true,
+    HTMLAttributes: {
+      class: "rounded-lg border border-stone-200",
     },
   }),
   FontFamily.configure({
